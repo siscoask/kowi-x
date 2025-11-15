@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kowi X Technologies - Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-primary: #F0F8FF; --bg-secondary: #E6F0FA; --accent-primary: #007BFF; --accent-secondary: #0056B3;
+      --cosmic-gold: #00D4FF; --text-primary: #1A1A1A; --text-secondary: #4A4A4A; --success: #00FF7F;
+      --error: #FF4040; --footer-bg: #D6EAF8;
+    }
+    .dark-mode {
+      --bg-primary: #0A1F3D; --bg-secondary: #132F5C; --text-primary: #FFFFFF; --text-secondary: #D3D3D3;
+      --footer-bg: #132F5C;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Raleway', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; scroll-behavior: smooth; overflow-x: hidden; }
+    #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: linear-gradient(135deg, #0A1F3D, #132F5C); }
+    .content-wrapper { transition: filter 0.3s; }
+    header { position: fixed; top: 0; width: 100%; background: rgba(240,248,255,0.9); backdrop-filter: blur(10px); z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s; }
+    header.shrink { transform: scale(0.98); }
+    .top-bar { background: var(--accent-primary); color: #FFF; text-align: center; padding: 0.5rem; font-size: 0.9rem; text-shadow: 0 0 5px var(--accent-primary); }
+    .main-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+    .logo { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--accent-primary); text-shadow: 0 0 10px var(--accent-primary); }
+    nav { display: flex; gap: 1.5rem; position: relative; }
+    nav a { color: var(--text-primary); text-decoration: none; font-weight: 500; position: relative; padding: 0.2rem 0; transition: color 0.3s, text-shadow 0.3s; }
+    @media (min-width: 769px) {
+      nav a::before { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--accent-primary), var(--cosmic-gold)); transition: width 0.4s ease; }
+      nav a:hover::before { width: 100%; }
+      nav a:hover { color: var(--cosmic-gold); text-shadow: 0 0 10px var(--cosmic-gold); }
+      nav a::after { content: ''; position: absolute; top: 50%; left: 0; width: 0; height: 100%; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><circle cx="5" cy="5" r="2" fill="%2300D4FF" opacity="0.5"/></svg>') repeat-x; background-size: 10px; opacity: 0; transition: width 0.4s ease, opacity 0.2s ease; pointer-events: none; }
+      nav a:hover::after { width: 100%; opacity: 1; animation: particleTrail 1s infinite; }
+    }
+    @keyframes particleTrail { 0% { background-position: 0 0; } 100% { background-position: 100px 0; } }
+    .hamburger { display: none; font-size: 1.5rem; cursor: pointer; color: var(--text-primary); }
+    .hamburger:hover { color: var(--cosmic-gold); text-shadow: 0 0 10px var(--cosmic-gold); }
+    .nav-header { display: none; }
+    .hero { position: relative; height: 600px; overflow: hidden; text-align: center; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); border-radius: 15px; margin: 120px auto 2rem; max-width: 1400px; }
+    .hero-carousel { position: relative; width: 100%; height: 100%; }
+    .hero-slide { position: absolute; top: 0; left: 100%; width: 100%; height: 100%; opacity: 0; transition: left 0.5s ease, opacity 0.5s ease; }
+    .hero-slide.active { left: 0; opacity: 1; }
+    .hero-slide img { width: 100%; height: 100%; object-fit: cover; animation: zoomIn 1.5s ease-in-out; transition: transform 0.3s ease; }
+    @keyframes zoomIn { 0% { transform: scale(1.2); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+    .hero-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #FFF; text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); width: 90%; max-width: 600px; }
+    .hero-content h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; animation: heartbeat 2s infinite; text-shadow: 0 0 20px var(--cosmic-gold); }
+    @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+    .hero-content p { font-size: 1.2rem; margin-bottom: 1.5rem; animation: slideInRight 1s ease-in-out 0.3s both; }
+    .hero-content button { background: linear-gradient(45deg, var(--accent-primary), var(--cosmic-gold)); color: #FFF; border: none; padding: 1rem 2rem; font-size: 1.2rem; cursor: pointer; border-radius: 20px; box-shadow: 0 0 20px var(--cosmic-gold); transition: all 0.3s; animation: bounceIn 1s ease-in-out 0.6s both; }
+    .hero-content button:hover { background: linear-gradient(45deg, var(--cosmic-gold), var(--accent-primary)); box-shadow: 0 0 30px var(--cosmic-gold); transform: scale(1.05); }
+    @keyframes slideInRight { 0% { transform: translateX(100%); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
+    @keyframes bounceIn { 0% { transform: scale(0); opacity: 0; } 60% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(1); } }
+    main { padding: 2rem; max-width: 1400px; margin: 0 auto; }
+    .section { position: relative; margin: 3rem 0; background: var(--bg-secondary); padding: 2rem; border-radius: 15px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .section.visible { opacity: 1; transform: translateY(0); }
+    .section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, rgba(0,123,255,0.1), rgba(0,212,255,0.1)); opacity: 0.5; z-index: -1; animation: auroraShift 10s infinite; }
+    @keyframes auroraShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--accent-primary); text-shadow: 0 0 10px var(--cosmic-gold); margin-bottom: 1rem; }
+    .welcome p, .why-kowix p, .cta-section p { animation: fadeIn 1s ease-in; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .featured-services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
+    .service-card { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px); padding: 1.5rem; border-radius: 15px; text-align: center; transition: transform 0.5s ease, box-shadow 0.5s ease; position: relative; overflow: hidden; border: 2px solid transparent; }
+    .service-card:nth-child(1) { border-color: var(--accent-primary); }
+    .service-card:nth-child(2) { border-color: var(--cosmic-gold); }
+    .service-card:nth-child(3) { border-color: var(--success); }
+    .service-card:nth-child(4) { border-color: #FF8C00; }
+    .service-card:nth-child(5) { border-color: #FF4500; }
+    .service-card:nth-child(6) { border-color: #9370DB; }
+    .service-card:nth-child(7) { border-color: #32CD32; }
+    .service-card:hover { transform: translateY(-10px); box-shadow: 0 0 30px var(--cosmic-gold); }
+    .service-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(0,212,255,0.2), transparent 70%); opacity: 0; transition: opacity 0.5s; pointer-events: none; }
+    .service-card:hover::before { opacity: 1; }
+    .service-card i { font-size: 3.5rem; margin-bottom: 1rem; color: var(--cosmic-gold); text-shadow: 0 0 15px var(--cosmic-gold); transition: transform 0.3s; }
+    .service-card:hover i { transform: scale(1.1); }
+    .service-card h3 { font-size: 1.3rem; margin: 0.5rem 0; color: var(--accent-primary); text-shadow: 0 0 5px var(--cosmic-gold); }
+    .service-card p { font-size: 1rem; margin-bottom: 1rem; }
+    .testimonials .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
+    .testimonial-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); padding: 1.5rem; border-radius: 15px; text-align: center; transition: transform 0.5s ease, box-shadow 0.5s ease; position: relative; overflow: hidden; border: 2px solid transparent; }
+    .testimonial-card:nth-child(1) { border-color: var(--accent-primary); }
+    .testimonial-card:nth-child(2) { border-color: var(--cosmic-gold); }
+    .testimonial-card:nth-child(3) { border-color: var(--success); }
+    .testimonial-card:hover { transform: translateY(-10px); box-shadow: 0 0 30px var(--cosmic-gold); }
+    .testimonial-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(0,212,255,0.2), transparent 70%); opacity: 0; transition: opacity 0.5s; }
+    .testimonial-card:hover::before { opacity: 1; }
+    .testimonial-card img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 3px solid var(--cosmic-gold); }
+    .testimonial-card p { font-style: italic; margin-bottom: 1rem; }
+    .testimonial-card cite { display: block; font-weight: 600; color: var(--accent-primary); }
+    .founder-vision { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+    .founder-img { width: 200px; height: 200px; border-radius: 50%; overflow: hidden; border: 5px solid var(--cosmic-gold); box-shadow: 0 0 20px var(--cosmic-gold); }
+    .founder-img img { width: 100%; height: 100%; object-fit: cover; }
+    .founder-name { font-weight: 700; font-size: 1.3rem; color: var(--accent-primary); margin-top: 0.5rem; }
+    .founder-note { max-width: 800px; font-size: 1.1rem; }
+    .cta-section { text-align: center; }
+    .cta-section p { margin-bottom: 2rem; }
+    .cta-section button { background: linear-gradient(45deg, var(--accent-primary), var(--cosmic-gold)); color: #FFF; border: none; padding: 1rem 2rem; font-size: 1.2rem; cursor: pointer; border-radius: 20px; box-shadow: 0 0 20px var(--cosmic-gold); transition: all 0.3s; }
+    .cta-section button:hover { background: linear-gradient(45deg, var(--cosmic-gold), var(--accent-primary)); box-shadow: 0 0 30px var(--cosmic-gold); transform: scale(1.05); }
+    footer { background: var(--footer-bg); padding: 3rem 1rem; position: relative; border-top: 5px solid var(--cosmic-gold); margin-top: 3rem; box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2); }
+    footer::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, var(--accent-secondary), var(--cosmic-gold)); opacity: 0.1; z-index: -1; }
+    .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; color: var(--text-primary); background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(5px); padding: 2rem; border-radius: 15px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); max-width: 1400px; margin: 0 auto; }
+    footer h3 { font-family: 'Playfair Display', serif; margin-bottom: 1rem; font-size: 1.3rem; font-weight: 600; background: linear-gradient(to right, var(--accent-primary), var(--cosmic-gold)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 5px rgba(0, 0, 0, 0.2); }
+    footer p, footer a { color: var(--text-secondary); text-decoration: none; margin: 0.5rem 0; transition: all 0.3s ease; }
+    a:not(nav a):hover { background: linear-gradient(to right, var(--accent-primary), var(--cosmic-gold)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 10px var(--cosmic-gold); transform: scale(1.05); }
+    footer p i { margin-right: 0.5rem; color: var(--accent-primary); }
+    .social-icons { display: flex; gap: 1rem; }
+    .social-icons a { font-size: 1.8rem; color: var(--text-secondary); transition: transform 0.3s, color 0.3s, text-shadow 0.3s; }
+    .social-icons a:hover { color: var(--cosmic-gold); transform: scale(1.2); text-shadow: 0 0 10px var(--cosmic-gold); }
+    .back-to-top { text-align: center; margin-top: 2rem; }
+    .back-to-top a { display: inline-block; padding: 0.5rem 1rem; background: linear-gradient(45deg, var(--accent-primary), var(--cosmic-gold)); color: #FFF; border-radius: 20px; text-decoration: none; font-weight: 600; box-shadow: 0 0 10px var(--cosmic-gold); transition: all 0.3s; }
+    .back-to-top a:hover { background: linear-gradient(45deg, var(--cosmic-gold), var(--accent-primary)); box-shadow: 0 0 20px var(--cosmic-gold); }
+    @media (max-width: 1200px) { .main-header { padding: 1rem 1.5rem; } .logo { font-size: 2rem; } .hero { height: 500px; margin-top: 100px; } }
+    @media (max-width: 768px) { 
+      .main-header { flex-wrap: wrap; gap: 0.5rem; padding: 0.5rem 1rem; } 
+      .logo { font-size: 1.5rem; } 
+      nav { display: none; position: fixed; top: 0; left: -70%; width: 70%; height: 100vh; background: linear-gradient(135deg, var(--accent-primary), var(--cosmic-gold)); padding: 2rem 1rem; box-shadow: 2px 0 15px rgba(0, 0, 0, 0.3); transition: left 0.3s ease; z-index: 1001; overflow-y: auto; } 
+      nav.active { display: block; left: 0; } 
+      .nav-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; } 
+      nav .nav-header h3 { font-size: 1.5rem; font-weight: 700; color: #FFF; text-shadow: 0 0 10px var(--cosmic-gold); } 
+      nav .close-nav { font-size: 1.5rem; color: #FFF; cursor: pointer; transition: transform 0.3s, text-shadow 0.3s; } 
+      nav .close-nav:hover { transform: rotate(90deg); text-shadow: 0 0 10px var(--cosmic-gold); } 
+      nav a { display: block; margin: 1.5rem 0; font-size: 1.2rem; color: #FFF; text-shadow: 0 0 5px var(--cosmic-gold); padding: 0.5rem 1rem; border-radius: 5px; background: rgba(255, 255, 255, 0.16); transition: transform 0.3s, background 0.3s, text-shadow 0.3s; opacity: 0; transform: translateX(-20px); animation: slideInNav 0.5s forwards; animation-delay: calc(0.1s * var(--nav-index)); } 
+      nav a:hover { background: rgba(255, 255, 255, 0.2); transform: translateX(10px); text-shadow: 0 0 15px var(--cosmic-gold); } 
+      @keyframes slideInNav { to { opacity: 1; transform: translateX(0); } } 
+      .hamburger { display: block; } 
+      .hero { height: 400px; margin-top: 120px; } 
+      .hero-content h1 { font-size: 2.2rem; } 
+      .hero-content p { font-size: 1rem; } 
+      .hero-content button { padding: 0.8rem 1.5rem; font-size: 1rem; } 
+      main { padding: 1rem; } 
+      .section { padding: 1.5rem; margin: 1.5rem 0; } 
+      h2 { font-size: 1.8rem; } 
+      .service-card, .testimonial-card { padding: 1.2rem; } 
+      .service-card i, .testimonial-card img { font-size: 2.5rem; width: 60px; height: 60px; } 
+      .service-card h3, .testimonial-card cite { font-size: 1.1rem; } 
+      .service-card p { font-size: 0.9rem; } 
+      .cta-section p { margin-bottom: 1.5rem; }
+      .cta-section button { padding: 0.8rem 1.5rem; font-size: 1rem; } 
+      footer { padding: 2rem 1rem; } 
+      .footer-content { padding: 1rem; gap: 1rem; } 
+      footer h3 { font-size: 1.1rem; } 
+      footer p, footer a { font-size: 0.9rem; } 
+      .social-icons a { font-size: 1.5rem; } 
+      .back-to-top a { padding: 0.4rem 0.8rem; font-size: 0.9rem; } 
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+  <div class="content-wrapper">
+    <header>
+      <div class="top-bar">Securing Today, Innovating Tomorrow</div>
+      <div class="main-header">
+        <div class="logo">Kowi X</div>
+        <span class="hamburger">☰</span>
+        <nav>
+          <div class="nav-header">
+            <h3>Kowi X</h3>
+            <span class="close-nav">✖</span>
+          </div>
+          <a href="index.html" class="nav-link" style="--nav-index:1">Home</a>
+          <a href="about.html" class="nav-link" style="--nav-index:2">About</a>
+          <a href="services.html" class="nav-link" style="--nav-index:3">Services</a>
+          <a href="blog.html" class="nav-link" style="--nav-index:4">Blog</a>
+          <a href="contact.html" class="nav-link" style="--nav-index:5">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="hero">
+        <div class="hero-carousel">
+          <div class="hero-slide active"><img src="https://i.pinimg.com/1200x/f7/a9/02/f7a9022a447428ffb62afa4afeff7f24.jpg" alt="Cyber Shield"></div>
+          <div class="hero-slide"><img src="https://i.pinimg.com/1200x/c1/7a/92/c17a92cfcd8108005d42aa63d825bc16.jpg" alt="Academy"></div>
+          <div class="hero-slide"><img src="https://i.pinimg.com/736x/1c/89/fd/1c89fd017a91a8aae9cd694c956451ec.jpg" alt="Innovation"></div>
+        </div>
+        <div class="hero-content">
+          <h1>Kowi X Technologies</h1>
+          <p>Securing Today, Innovating Tomorrow</p>
+          <button onclick="location.href='services.html'">Explore Services</button>
+        </div>
+      </section>
+
+      <section class="welcome section" id="welcome">
+        <h2>Welcome to Kowi X</h2>
+        <p>At Kowi X Technologies, we pioneer cybersecurity, education, innovation, and social impact in Lagos, Nigeria. Our seven subsidiaries deliver end-to-end tech solutions with excellence, from ethical hacking and compliance to AI training, fintech apps, and community empowerment programs.</p>
+      </section>
+
+      <section class="why-kowix section">
+        <h2>Why Choose Kowi X?</h2>
+        <p>Expert teams across subsidiaries, cutting-edge tools, proven results in Lagos and beyond, focus on education and ethical innovation. We secure enterprises, train the next generation, and build sustainable digital solutions for Africa's future.</p>
+      </section>
+
+      <section class="featured-services section" id="services">
+        <h2>Core Services</h2>
+        <p>Flagship offerings from our key subsidiaries, designed to transform your security, skills, and business.</p>
+        <div class="featured-services-grid">
+          <div class="service-card">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Kowi X Cybersecurity & Consulting</h3>
+            <p>To safeguard the digital landscape by delivering end-to-end cybersecurity solutions and strategic consulting services.</p>
+          </div>
+          <div class="service-card">
+            <i class="fas fa-graduation-cap"></i>
+            <h3>Kowi X Academy</h3>
+            <p>To build competent, future-ready tech professionals through practical and industry-aligned education.</p>
+          </div>
+          <div class="service-card">
+            <i class="fas fa-lightbulb"></i>
+            <h3>Kowi X Innovations</h3>
+            <p>To serve as the creative and technical hub specializing in websites, mobile apps, and digital products.</p>
+          </div>
+          <div class="service-card">
+            <i class="fas fa-video"></i>
+            <h3>Kowi X Media</h3>
+            <p>To share technology insights and innovation stories through engaging digital content.</p>
+          </div>
+          <div class="service-card">
+            <i class="fas fa-heartbeat"></i>
+            <h3>Kowi X Health</h3>
+            <p>To promote accessible healthcare with quality drugs and tech-supported services.</p>
+          </div>
+          <div class="service-card">
+            <i class="fas fa-hands-helping"></i>
+            <h3>Kowi X Foundation</h3>
+            <p>To inspire social development through mentorship and digital literacy programs.</p>
+          </div>
+          <div class="service-card">
+            <i class="fas fa-cogs"></i>
+            <h3>Kowi X Labs</h3>
+            <p>R&D in AI, quantum security, IoT, emerging tech prototypes and patents.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="testimonials section">
+        <h2>What Our Team Says</h2>
+        <div class="testimonial-grid">
+          <div class="testimonial-card">
+            <img src="pels.jpeg" alt="Social Media Manager">
+            <p>"Leading digital conversations with impact and creativity."</p>
+            <cite>Lawal Oluwapelumi – Social Media Manager</cite>
+          </div>
+          <div class="testimonial-card">
+            <img src="mr jerry.jpg" alt="Secretary">
+            <p>"Efficiency and warmth in every interaction."</p>
+            <cite>Okechukwu Jeremiah – Administratuve and Finance Lead</cite>
+          </div>
+          <div class="testimonial-card">
+            <img src="perry.jpg" alt="Content Creator">
+            <p>"Crafting stories that inspire and educate."</p>
+            <cite>Precious Ebunoluwa – Content Creator</cite>
+          </div>
+        </div>
+      </section>
+
+      <section class="founder-vision section">
+        <h2>Founder's Vision</h2>
+        <div class="founder-vision">
+          <div class="founder-img"><img src="sniper.png" alt="Founder"></div>
+          <div class="founder-name">Koiki Olabode Williams</div>
+          <p class="founder-note">To build a resilient African digital ecosystem where security, innovation, and education converge to empower individuals, businesses, and communities. Kowi X exists to protect digital futures, train tomorrow's leaders, and deliver technology that uplifts society — creating a legacy of ethical, impactful, and sustainable progress across Nigeria and beyond.</p>
+        </div>
+      </section>
+
+      <section class="cta-section section">
+        <h2>Ready to Secure & Innovate?</h2>
+        <p>Partner with Kowi X for comprehensive tech solutions that deliver results. Contact us today to start your journey.</p>
+        <button onclick="location.href='contact.html'">Get Started</button>
+      </section>
+    </main>
+  <footer>
+      <div class="footer-content">
+        <div>
+          <h3>Kowi X Technologies</h3>
+          <p><i class="fas fa-map-marker-alt"></i> Lagos, Nigeria</p>
+          <p><i class="fas fa-phone-alt"></i> +234 907 387 2269</p>
+          <p><i class="fas fa-envelope"></i> kowixtech@gmail.com</p>
+        </div>
+        <div>
+          <h3>Quick Links</h3>
+          <p><a href="index.html">Home</a></p>
+          <p><a href="about.html">About</a></p>
+          <p><a href="services.html">Services</a></p>
+          <p><a href="blog.html">Blog</a></p>
+          <p><a href="contact.html">Contact</a></p>
+        </div>
+        <div>
+          <h3>Follow Us</h3>
+          <div class="social-icons">
+            <a href="https://youtube.com/@kowixtech?si=Zu5X_l_ofFrzzLVM" class="fab fa-youtube"></a>
+            <a href="https://www.linkedin.com/company/kowi-x-technologies/?viewAsMember=true" class="fab fa-linkedin"></a>
+            <a href="https://www.instagram.com/kowixtech?igsh=MWg3b2o4OGNzdGN3Mg==" class="fab fa-instagram"></a>
+            <a href="https://x.com/KowiXTech?t=0tCgtMENnYjf1c6V_nKsQA&s=09" class="fab fa-twitter"></a>
+          </div>
+        </div>
+      </div>
+      <div class="back-to-top"><a href="#hero">Back to Top ⬆</a></div>
+    </footer>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('particles'), ctx = canvas.getContext('2d');
+    canvas.width = innerWidth; canvas.height = innerHeight;
+    const particles = [], n = 100;
+    class P { constructor() { this.x = Math.random()*canvas.width; this.y = Math.random()*canvas.height; this.size = Math.random()*3+1; this.dx = Math.random()*1-0.5; this.dy = Math.random()*1-0.5; this.c = 'rgba(0,212,255,0.7)'; } update() { this.x += this.dx; this.y += this.dy; if (this.x<0 || this.x>canvas.width) this.dx*=-1; if (this.y<0 || this.y>canvas.height) this.dy*=-1; } draw() { ctx.fillStyle = this.c; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); } }
+    for(let i=0;i<n;i++) particles.push(new P());
+    function anim() { ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{p.update();p.draw();}); requestAnimationFrame(anim); }
+    anim();
+    addEventListener('resize',()=>{canvas.width=innerWidth;canvas.height=innerHeight;});
+
+    const slides = document.querySelectorAll('.hero-slide'); let cur=0;
+    function show(i){slides.forEach((s,j)=>s.classList.toggle('active',j===i));}
+    function next(){cur=(cur+1)%slides.length;show(cur);}
+    show(0); setInterval(next,5000);
+
+    const hero = document.querySelector('.hero');
+    hero.addEventListener('mousemove',e=>{
+      const r = hero.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top, cx=r.width/2, cy=r.height/2;
+      const tx=(cy-y)/cy*10, ty=(x-cx)/cx*10;
+      hero.querySelectorAll('img').forEach(img=>img.style.transform=`rotateX(${tx}deg) rotateY(${ty}deg)`);
+    });
+    hero.addEventListener('mouseleave',()=>hero.querySelectorAll('img').forEach(img=>img.style.transform=''));
+
+    const sections = document.querySelectorAll('.section');
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }), { threshold: 0.1 });
+    sections.forEach(sec => observer.observe(sec));
+
+    const hamburger = document.querySelector('.hamburger'), nav = document.querySelector('nav'), closeNav = document.querySelector('.close-nav'), contentWrapper = document.querySelector('.content-wrapper');
+    hamburger.addEventListener('click', () => { nav.classList.add('active'); contentWrapper.classList.add('nav-open'); });
+    closeNav.addEventListener('click', () => { nav.classList.remove('active'); contentWrapper.classList.remove('nav-open'); });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('active');
+        contentWrapper.classList.remove('nav-open');
+      });
+    });
+
+    window.addEventListener('scroll', () => {
+      document.querySelector('header').classList.toggle('shrink', window.scrollY > 50);
+    });
+  </script>
+</body>
+</html>
